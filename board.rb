@@ -1,4 +1,6 @@
 class Board
+  attr_reader :colors
+
   def initialize
     @game_row = Array.new(4, '_')
     @pegs = Array.new(4, '_')

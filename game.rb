@@ -1,11 +1,9 @@
 require_relative 'computer'
 require_relative 'player'
 require_relative 'board'
-require_relative 'foo'
 
 class Game
-  include Foo
-  attr_accessor :player
+  attr_reader :player, :board, :computer
 
   def initialize
     @computer = Computer.new
@@ -14,36 +12,49 @@ class Game
   end
 
   def play
-    make_move(player)
-    computer.create_secret_code
-  end
-
-  def make_move(player)
-    get_guesses(player)
+    introduction_board
+    # while computer.secret_code != player.player_guess
+    make_move
   end
 
   private
 
-  def get_guesses(player)
-    puts 'Enter color for spot 1: '
-    spot1 = gets.chomp.downcase
-    puts 'Enter color for spot 2: '
-    spot2 = gets.chomp.downcase
-    puts 'Enter color for spot 3: '
-    spot3 = gets.chomp.downcase
-    puts 'Enter color for spot 4: '
-    spot4 = gets.chomp.downcase
-    player.player_guess = [spot1, spot2, spot3, spot4]
-    print player.player_guess
+  def computer_create_secret_code
+    computer.create_secret_code
   end
 
-  def feedback; end
+  def introduction_board
+    puts board.colors
+  end
 
-  def compare; end
+  def make_move
+    player.make_move
+  end
+
+  # def feedback
+  #   bulls = 0
+  #   cows = 0
+  #   computer = computer.secret_code
+  #   guess = player.player_guess
+
+  #   computer.each do |element|
+  #     guess.include?(element)
+  #     if guess.index(element) == element.index
+  #       bulls += 1
+  #     end
+
+  #   end
+
+  # end
+
+  # def compare
+  #   if in array but not right spot
+  #     return
+  # end
 
   def p; end
 end
 
 game = Game.new
 game.play
-game.player.make_move
+puts game.computer.secret_code

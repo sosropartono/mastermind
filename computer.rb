@@ -1,5 +1,5 @@
 class Computer
-  attr_accessor :secret_code
+  attr_reader :colors, :secret_code
 
   def initialize
     @secret_code = Array.new(4)
@@ -8,10 +8,8 @@ class Computer
 
   def create_secret_code
     for a in 1..4 do
-      secret_code << colors.sample
-      print secret_code
+      @secret_code << colors.sample
+      puts 'Secret Code Created!'
     end
-
-    secret_code
   end
 end
