@@ -15,6 +15,7 @@ class Game
     introduction_board
     # while computer.secret_code != player.player_guess
     make_move
+    feedback
   end
 
   private
@@ -31,26 +32,23 @@ class Game
     player.make_move
   end
 
-  # def feedback
-  #   bulls = 0
-  #   cows = 0
-  #   computer = computer.secret_code
-  #   guess = player.player_guess
-
-  #   computer.each do |element|
-  #     guess.include?(element)
-  #     if guess.index(element) == element.index
-  #       bulls += 1
-  #     end
-
-  #   end
-
-  # end
-
-  # def compare
-  #   if in array but not right spot
-  #     return
-  # end
+  def feedback
+    bulls = 0
+    cows = 0
+    computer = computer.secret_code
+    guess = player.player_guess
+    computer.each_with_index do |element, _index|
+      if guess.index(element) == index
+        guess[guess.index(element)] = 0
+        cows += 1
+      elsif guess.index(element)
+        guess[guess.index(element)] = 0
+        bulls += 1
+      end
+    end
+    puts "Cows: #{cows}"
+    puts "Bulls: #{cows}"
+  end
 
   def p; end
 end
