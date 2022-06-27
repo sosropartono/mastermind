@@ -1,10 +1,10 @@
 class Board
-  attr_reader :colors
+  attr_reader :numbers, :tries
 
   def initialize
     @game_row = Array.new(4, '_')
-    @pegs = Array.new(4, '_')
-    @colors = %w[red orange yellow green blue purple]
+    @tries = 0
+    @numbers = %w[1 2 3 4 5 6]
   end
 
   def introduction_board
