@@ -16,7 +16,7 @@ class Player
     spot3 = gets.chomp.downcase
     puts 'Enter color for spot 4: '
     spot4 = gets.chomp.downcase
-    @player_guess = [spot1, spot2, spot3, spot4]
+    @guess = [spot1, spot2, spot3, spot4]
   end
 
   def make_code
@@ -28,7 +28,7 @@ class Player
     spot3 = gets.chomp.downcase
     puts 'Enter color for spot 4: '
     spot4 = gets.chomp.downcase
-    @player_code = [spot1, spot2, spot3, spot4]
+    @secret_code = [spot1, spot2, spot3, spot4]
   end
 
   # def make_guess

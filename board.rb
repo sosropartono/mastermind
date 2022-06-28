@@ -8,14 +8,11 @@ class Board
   end
 
   def introduction_board
-    puts ' _ '
+    print ' _ '
   end
 
   def display_board
     puts " #{@game_row[0]} #{@game_row[0]} #{@game_row[0]}  #{@game_row[0]} "
   end
 
-  def display_pegs
-    puts " #{@game_row[0]} #{@game_row[0]} #{@game_row[0]}  #{@game_row[0]} "
-  end
 end

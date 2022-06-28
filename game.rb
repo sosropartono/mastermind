@@ -10,27 +10,28 @@ class Game
     @board = Board.new
     @player = Player.new
     @winner = 0
+    @tries = 0
   end
 
   def play
     puts 'do you want to be coder or solver'
     answer = gets.chomp
     if answer == 'solver'
-      make_move(player)
       introduction_board
       computer_create_secret_code
-      while @winner != 1
+      while @winner != 1 && @tries < 12
         make_move(player)
         feedback(computer, player)
+        @tries += 1
       end
-      winner
+      winner_statement
     else
-      make_move(computer)
       introduction_board
       player_create_secret_code
-      while @winner != 1
+      while @winner != 1 && @tries < 12
         make_move(computer)
         feedback(player, computer)
+        @tries += 1
       end
       winner_statement
     end
@@ -58,29 +59,31 @@ class Game
     solver.make_move
   end
 
-  def feedback(_coder, _solver)
-    bulls = 0
-    cows = 0
-    neither = 0
+  def feedback(coder, solver)
+    black = 0
+    white = 0
+    none = 0
     secret_code = coder.secret_code
     guess = solver.guess
-    print "Player's guess is #{guess} "
+    puts "#{solver}'s guess is #{guess}"
+    puts "secret code is #{secret_code}"
     secret_code.each_with_index do |element, index|
       if index == guess.index(element)
         guess[guess.index(element)] = 0
-        cows += 1
+        black += 1
       elsif guess.index(element)
         guess[guess.index(element)] = 0
-        bulls += 1
+        white += 1
       else
-        neither += 1
+        none += 1
 
       end
     end
-    puts "black: #{cows}"
-    puts "white: #{bulls}"
-    puts "None: #{neither}"
-    winner_check(bulls)
+    puts "black: #{black}"
+    puts "white: #{white}"
+    puts "None: #{none}"
+    coder.min_max(black, white, none) if coder.instance_of?(Computer)
+    winner_check(black)
   end
 
   def winner_check(bulls)
