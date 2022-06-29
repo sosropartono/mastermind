@@ -1,39 +1,49 @@
 require 'set'
 
 class Computer
-  attr_reader :numbers, :secret_code, :guess, :set, :tries
+  attr_reader :numbers, :secret_code, :guess, :set, :tries, :possible_codes, :next_guess
+
+  NUMBERS = %w[1 2 3 4 5 6].freeze
 
   def initialize
     @secret_code = []
     @guess = []
-    @response = []
-    @set = Set.new(1111..6666)
+    @next_guess = []
+    # @possible_codes = generate_all_possible_code
     @tries = 0
-    @numbers = %w[1 2 3 4 5 6]
   end
 
   def create_secret_code
     for a in 1..4 do
-      @secret_code << numbers.sample
-      puts 'Secret Code Created!'
+      @secret_code << NUMBERS.sample
     end
+    puts 'Computer has Created the Code!'
   end
 
-  def first_move
-    @secret_code = [1, 1, 2, 2]
-  end
-
-  def calculate_score(black, white, none)
-
-  def min_max(black, white, none)
-    if 
-    if none
-    score
+  def next_guess(secret_code)
+    i = 0
+    new_guess = []
+    includes = []
+    while i < 4
+      puts "guess is #{guess[i]}"
+      new_guess << if secret_code[i] == @guess[i]
+                     secret_code[i]
+                   else
+                     NUMBERS.sample
+                   end
+      i += 1
+    end
+    @guess = new_guess
   end
 
   def make_move
-    @secret_code = [1, 1, 2, 2] if @tries == 0
-
-    # @secret_code = 
+    @guess = %w[1 1 2 2] if @tries.zero?
+    @tries += 1
   end
 end
+
+# def generate_all_possible_code
+#   permutation = []
+#   NUMBERS.repeated_permutation(4) { |num| permutation.push(num) }
+#   permutation
+# end

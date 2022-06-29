@@ -14,8 +14,8 @@ class Game
   end
 
   def play
-    puts 'do you want to be coder or solver'
-    answer = gets.chomp
+    introduction
+    answer = gets.chomp.downcase
     if answer == 'solver'
       introduction_board
       computer_create_secret_code
@@ -39,6 +39,15 @@ class Game
 
   private
 
+  def introduction
+    puts 'Welcome to Mastermind!'
+    puts 'You will either create a code(Coder) or be the code cracker(Solver)!'
+    puts 'The Coder will create a 4 digit code from numbers 1 - 6'
+    puts 'The Solver will have 12 Rounds to solve the code, or the Coder wins!'
+    puts 'Can you beat the machine?'
+    puts 'Will you be the Solver or Coder?'
+  end
+
   def player_create_secret_code
     player.make_code
   end
@@ -52,7 +61,7 @@ class Game
   end
 
   def introduction_board
-    puts board.numbers
+    board.introduction_board
   end
 
   def make_move(solver)
@@ -60,29 +69,27 @@ class Game
   end
 
   def feedback(coder, solver)
+    solver_guess = []
+    solver.guess.each { |element| solver_guess << element }
     black = 0
     white = 0
     none = 0
     secret_code = coder.secret_code
-    guess = solver.guess
-    puts "#{solver}'s guess is #{guess}"
-    puts "secret code is #{secret_code}"
     secret_code.each_with_index do |element, index|
-      if index == guess.index(element)
-        guess[guess.index(element)] = 0
+      if index == solver_guess.index(element)
+        solver_guess[solver_guess.index(element)] = 0
         black += 1
-      elsif guess.index(element)
-        guess[guess.index(element)] = 0
+      elsif solver_guess.index(element)
+        solver_guess[solver_guess.index(element)] = 0
         white += 1
       else
         none += 1
-
       end
     end
     puts "black: #{black}"
     puts "white: #{white}"
     puts "None: #{none}"
-    coder.min_max(black, white, none) if coder.instance_of?(Computer)
+    solver.next_guess(secret_code) if solver.instance_of? Computer
     winner_check(black)
   end
 
@@ -93,4 +100,3 @@ end
 
 game = Game.new
 game.play
-print game.computer.secret_code

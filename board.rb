@@ -12,7 +12,6 @@ class Board
   end
 
   def display_board
-    puts " #{@game_row[0]} #{@game_row[0]} #{@game_row[0]}  #{@game_row[0]} "
+    print " #{@game_row[0]} #{@game_row[0]} #{@game_row[0]}  #{@game_row[0]} "
   end
-
 end

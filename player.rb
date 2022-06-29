@@ -8,25 +8,25 @@ class Player
   end
 
   def make_move
-    puts 'Enter color for spot 1: '
+    puts 'Enter number for spot 1: '
     spot1 = gets.chomp.downcase
-    puts 'Enter color for spot 2: '
+    puts 'Enter number for spot 2: '
     spot2 = gets.chomp.downcase
-    puts 'Enter color for spot 3: '
+    puts 'Enter number for spot 3: '
     spot3 = gets.chomp.downcase
-    puts 'Enter color for spot 4: '
+    puts 'Enter number for spot 4: '
     spot4 = gets.chomp.downcase
     @guess = [spot1, spot2, spot3, spot4]
   end
 
   def make_code
-    puts 'Enter color for spot 1: '
+    puts 'Enter number for spot 1: '
     spot1 = gets.chomp.downcase
-    puts 'Enter color for spot 2: '
+    puts 'Enter number for spot 2: '
     spot2 = gets.chomp.downcase
-    puts 'Enter color for spot 3: '
+    puts 'Enter number for spot 3: '
     spot3 = gets.chomp.downcase
-    puts 'Enter color for spot 4: '
+    puts 'Enter number for spot 4: '
     spot4 = gets.chomp.downcase
     @secret_code = [spot1, spot2, spot3, spot4]
   end
